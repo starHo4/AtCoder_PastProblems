@@ -1,5 +1,5 @@
 #include <iostream>
-#include <algorithm>
+#include <map>
 #include <vector>
 using namespace std;
 int main()
@@ -11,21 +11,21 @@ int main()
     {
         cin >> c[i];
     }
-    int ans = 0;
-    for (int i = 0; i < N - K + 1; i++)
+    map<int, int> mp;
+    for (int i = 0; i < K; i++)
     {
-        vector<int> tmp(K);
-        for (int j = i; j < i + K; j++)
+        mp[c[i]]++;
+    }
+    int ans = mp.size();
+    for (int i = K; i < N; i++)
+    {
+        mp[c[i]]++;
+        mp[c[i - K]]--;
+        if (mp[c[i - K]] == 0)
         {
-            tmp[j-i] = c[j];
+            mp.erase(c[i - K]);
         }
-        sort(tmp.begin(), tmp.end());
-        decltype(tmp)::iterator result = unique(tmp.begin(), tmp.end());
-        tmp.erase(result, tmp.end());
-        int c_num = tmp.size();
-        if(ans < c_num){
-            ans = c_num;
-        }
+        ans = max(ans, (int)mp.size());
     }
     cout << ans << endl;
 }
