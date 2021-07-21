@@ -5,7 +5,7 @@ int main()
 {
     int A, B, C;
     cin >> A >> B >> C;
-    if (A > 0 && B > 0)
+    if (C % 2 == 1)
     {
         if (A < B)
         {
@@ -20,7 +20,17 @@ int main()
             cout << "=" << endl;
         }
     }
-    if (A < 0 || B < 0)
+    else
     {
+        if(abs(A) < abs(B)){
+            cout << "<" << endl;
+        }
+        else if(abs(A) > abs(B)){
+            cout << ">" << endl;
+        }
+        else
+        {
+            cout << "=" << endl;
+        }
     }
 }
